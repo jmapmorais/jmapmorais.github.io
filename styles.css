@@ -22,7 +22,7 @@ ul {
 h1, h2, h3, h4, h5, h6, p {
     color: midnightblue;
     background-color: whitesmoke;
-    padding: 0;
+    padding: 7;
     margin: 0;
     font-family: arial, sans-serif;
     font-weight: 400;
@@ -38,7 +38,7 @@ small {
 }
 
 header > * {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
 }
 
