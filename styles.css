@@ -22,7 +22,7 @@ ul {
 h1, h2, h3, h4, h5, h6, p {
     color: midnightblue;
     background-color: whitesmoke;
-    padding: 7;
+    padding: 0px;
     margin: 0;
     font-family: arial, sans-serif;
     font-weight: 400;
@@ -50,3 +50,17 @@ section {
     /* border-width: 1px; */
     /* border-color: #a0a0a0; */
 } 
+
+main {
+    padding-top: 10px;
+}
+
+p {
+    padding: 2px;
+}
+
+.cenas {
+    padding-bottom: 0px;
+}
+
+h2
