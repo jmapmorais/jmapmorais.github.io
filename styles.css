@@ -43,7 +43,7 @@ header > * {
 }
 
 section {
-    padding-block: 13px;
+    padding-block: 10px;
 
     /* Remove styles bellow to remove  border*/
     /* border-style: dashed; */
@@ -63,4 +63,6 @@ p {
     padding-bottom: 0px;
 }
 
-h2
+h2 {
+    padding-bottom: 7px;
+}
