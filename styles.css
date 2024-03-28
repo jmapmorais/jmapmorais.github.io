@@ -19,8 +19,16 @@ ul {
     padding-block: 0; /* shorthand for padding-top and padding-bottom */
 }
 
+.eyes {
+  width: 100%; /* Take up full width initially */
+  max-width: 500px; /* Limit the maximum width for large screens */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
 pre {
-    font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap; 
+  font-size: 8px; /* Base font size */
 }
 
 h1, h2, h3, h4, h5, h6, p {
