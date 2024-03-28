@@ -23,6 +23,8 @@ ul {
   width: 100%; /* Take up full width initially */
   max-width: 500px; /* Limit the maximum width for large screens */
   margin: 0 auto; /* Center the container horizontally */
+  display: flex;
+  justify-content: center;
 }
 
 pre {
