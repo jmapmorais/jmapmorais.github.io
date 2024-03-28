@@ -19,6 +19,10 @@ ul {
     padding-block: 0; /* shorthand for padding-top and padding-bottom */
 }
 
+pre {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 h1, h2, h3, h4, h5, h6, p {
     color: midnightblue;
     background-color: whitesmoke;
