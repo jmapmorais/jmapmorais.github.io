@@ -83,7 +83,7 @@ h2 {
 
 /*summary section*/
 details {
-  border: 1px solid #a0a0a0;
+  border: 0px solid #a0a0a0;
   border-radius: 4px;
   padding: 0.5em 0.5em 0;
 }
@@ -99,6 +99,6 @@ details[open] {
 }
 
 details[open] summary {
-  border-bottom: 1px solid #a0a0a0;
+  border-bottom: 0px solid #a0a0a0;
   margin-bottom: 0.5em;
 }
