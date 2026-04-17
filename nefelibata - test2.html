@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nefelibata Centered Orbit</title>
+    <style>
+        :root {
+            /* Path logic: Start at center (0,0), move left by radius (320), then draw arc */
+            --path: path("M 0,0 m -320, 0 a 320,180 0 1,1 640,0 a 320,180 0 1,1 -640,0");
+            --speed: 35s;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            background-color: #ffffff;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            /* Container size doesn't matter as much now because we use absolute centering */
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            z-index: 10;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .char {
+            position: absolute;
+            /* This ensures the 'start' of every letter's path is the center of the logo */
+            top: 50%;
+            left: 50%;
+            
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+            white-space: nowrap;
+            
+            offset-path: var(--path);
+            offset-rotate: 0deg; 
+            
+            animation: move var(--speed) linear infinite;
+        }
+
+        @keyframes move {
+            0% { offset-distance: 100%; }
+            100% { offset-distance: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="assets/LOGO-crop_NEFELIBATA PERPETUA.png" alt="Logo">
+    </div>
+    
+    <div id="slogan-container"></div>
+</div>
+
+<script>
+    const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom   ";
+    const container = document.getElementById('slogan-container');
+    const totalChars = slogan.length;
+
+    slogan.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.innerText = char === " " ? "\u00A0" : char;
+        
+        // Offset the timing so letters follow each other
+        span.style.animationDelay = `calc((${i} / ${totalChars}) * -${getComputedStyle(document.documentElement).getPropertyValue('--speed')})`;
+        
+        container.appendChild(span);
+    });
+</script>
+
+</body>
+</html>
