@@ -79,20 +79,19 @@
 </div>
 
 <script>
-    const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom   ";
+    const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom • ";
     const container = document.getElementById('slogan-container');
-    const totalChars = slogan.length;
-
+    
     // .reverse() flips the sequence of letters before they are processed
     const reversedLetters = slogan.split('').reverse();
     const totalChars = reversedLetters.length;
-    
-    slogan.split('').forEach((char, i) => {
+
+    reversedLetters.forEach((char, i) => {
         const span = document.createElement('span');
         span.className = 'char';
         span.innerText = char === " " ? "\u00A0" : char;
         
-        // Offset the timing so letters follow each other
+        // Distributes the reversed letters across the path timing
         span.style.animationDelay = `calc((${i} / ${totalChars}) * -${getComputedStyle(document.documentElement).getPropertyValue('--speed')})`;
         
         container.appendChild(span);
