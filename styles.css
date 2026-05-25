@@ -81,6 +81,12 @@ h2 {
     padding-bottom: 7px;
 }
 
+.char {
+        /* 1. Sub-pixel Smoothing & Anti-aliasing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed; 
+}
 /*summary section
 details {
   border: 1px solid #aaa;
