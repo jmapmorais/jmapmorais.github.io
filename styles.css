@@ -82,7 +82,12 @@ h2 {
 }
 
 .char {
-        /* 1. Sub-pixel Smoothing & Anti-aliasing */
+    /* 1. Force GPU Hardware Acceleration */
+    will-change: offset-distance, transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+
+    /* 2. Sub-pixel Smoothing & Anti-aliasing */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed; 
