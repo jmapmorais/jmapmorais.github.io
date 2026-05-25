@@ -92,6 +92,9 @@ h2 {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed; 
 }
+.char {
+    animation: move var(--speed) linear infinite;
+}
 /*summary section
 details {
   border: 1px solid #aaa;
