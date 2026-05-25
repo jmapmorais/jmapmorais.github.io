@@ -1,6 +1,6 @@
 body, html {
-    color: whitesmoke;
-    background-color: midnightblue;
+    color: midnightblue;
+    background-color: whitesmoke;
     font-family: arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -34,8 +34,8 @@ pre {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-    color: whitesmoke;
-    background-color: midnightblue;
+    color: midnightblue;
+    background-color: whitesmoke;
     padding: 0px;
     margin: 0;
     font-family: arial, sans-serif;
