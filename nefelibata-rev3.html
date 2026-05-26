@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,15 @@
             --dark-gray: #333333;
         }
 
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #ffffff;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: var(--dark-gray);
@@ -24,21 +30,21 @@
 
         .container {
             position: relative;
-            display: flex; 
-            justify-content: center; 
+            display: flex;
+            justify-content: center;
             align-items: center;
         }
 
         .logo {
             position: relative;
-            width: 380px; 
-            height: 380px; 
+            width: 380px;
+            height: 380px;
             z-index: 10;
-            display: flex; 
-            justify-content: center; 
+            display: flex;
+            justify-content: center;
             align-items: center;
-            cursor: pointer; 
-            user-select: none; 
+            cursor: pointer;
+            user-select: none;
         }
 
         .coded-logo {
@@ -79,9 +85,9 @@
 
         /* Spinning Background Slogan Core Engine */
         #slogan-container {
-            opacity: 0; 
-            pointer-events: none; 
-            transition: opacity 1.2s ease-in-out; 
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s ease-in-out;
         }
 
         #slogan-container.visible {
@@ -93,78 +99,85 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            
+
             font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--dark-gray);
             white-space: nowrap;
-            
+
             offset-path: var(--path);
-            offset-rotate: 0deg; 
-            
+            offset-rotate: 0deg;
+
             animation: move var(--speed) linear infinite;
         }
 
         @keyframes move {
-            0% { offset-distance: 100%; }
-            100% { offset-distance: 00%; }
+            0% {
+                offset-distance: 100%;
+            }
+
+            100% {
+                offset-distance: 00%;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="logo" id="logo-trigger">
-        <svg class="coded-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <path id="curve-bottom" d="M 20,100 A 80 45 0 0 0 180,100" fill="none" />
-                
-                <path id="curve-top" d="M 20,100 A 80 45 0 0 1 180,100" fill="none" />
-            </defs>
+    <div class="container">
+        <div class="logo" id="logo-trigger">
+            <svg class="coded-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="curve-bottom" d="M 20,100 A 80 45 0 0 0 180,100" fill="none" />
 
-            <text class="eye-text text-closed">
-                <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">nefelibata</textPath>
-            </text>
+                    <path id="curve-top" d="M 20,100 A 80 45 0 0 1 180,100" fill="none" />
+                </defs>
 
-            <text class="eye-text text-open-top">
-                <textPath href="#curve-top" startOffset="50%" text-anchor="middle">NEFELIBATA</textPath>
-            </text>
+                <text class="eye-text text-closed">
+                    <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">nefelibata</textPath>
+                </text>
 
-            <text class="eye-text text-open-bottom">
-                <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">PERPETUA</textPath>
-            </text>
-        </svg>
+                <text class="eye-text text-open-top">
+                    <textPath href="#curve-top" startOffset="50%" text-anchor="middle">NEFELIBATA</textPath>
+                </text>
+
+                <text class="eye-text text-open-bottom">
+                    <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">PERPETUA</textPath>
+                </text>
+            </svg>
+        </div>
+
+        <div id="slogan-container"></div>
     </div>
-    
-    <div id="slogan-container"></div>
-</div>
 
-<script>
-    // Slogan Array Processing Configuration
-    const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom   ";
-    const container = document.getElementById('slogan-container');
-    const totalChars = slogan.length;
-    
-    slogan.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.innerText = char === " " ? "\u00A0" : char;
-        
-        span.style.animationDelay = `calc((${i} / ${totalChars}) * -${getComputedStyle(document.documentElement).getPropertyValue('--speed')})`;
-        
-        container.appendChild(span);
-    });
+    <script>
+        // Slogan Array Processing Configuration
+        const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom   ";
+        const container = document.getElementById('slogan-container');
+        const totalChars = slogan.length;
 
-    // Interaction Trigger Management
-    const logoTrigger = document.getElementById('logo-trigger');
-    
-    logoTrigger.addEventListener('click', () => {
-        logoTrigger.classList.toggle('clicked');   // Transitions logo text layers into open eye orientation
-        container.classList.toggle('visible');     // Activates visibility of rotating slogan wheel
-    });
-</script>
+        slogan.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.innerText = char === " " ? "\u00A0" : char;
+
+            span.style.animationDelay = `calc((${i} / ${totalChars}) * -${getComputedStyle(document.documentElement).getPropertyValue('--speed')})`;
+
+            container.appendChild(span);
+        });
+
+        // Interaction Trigger Management
+        const logoTrigger = document.getElementById('logo-trigger');
+
+        logoTrigger.addEventListener('click', () => {
+            logoTrigger.classList.toggle('clicked');   // Transitions logo text layers into open eye orientation
+            container.classList.toggle('visible');     // Activates visibility of rotating slogan wheel
+        });
+    </script>
 
 </body>
+
 </html>
