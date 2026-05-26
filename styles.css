@@ -81,7 +81,30 @@ h2 {
     padding-bottom: 7px;
 }
 
+.char {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #333;
+    white-space: nowrap;
+    
+    offset-path: var(--path);
+    offset-rotate: 0deg; 
+    
+    animation: move var(--speed) linear infinite;
 
+    /* HARDWARE ACCELERATION (Smooths out path stutter) */
+    will-change: offset-distance;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+}
 /*summary section
 details {
   border: 1px solid #aaa;
