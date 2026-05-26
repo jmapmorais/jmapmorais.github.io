@@ -82,10 +82,6 @@
     const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals open-access space of autonomy-freedom   ";
     const container = document.getElementById('slogan-container');
     const totalChars = slogan.length;
-
-// .reverse() flips the sequence of letters before they are processed
-    const reversedLetters = slogan.split('').reverse();
-    const totalChars = reversedLetters.length;
     
     slogan.split('').forEach((char, i) => {
         const span = document.createElement('span');
