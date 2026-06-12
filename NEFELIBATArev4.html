@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEFELIBATA PERPETUA</title>
+    <style>
+        :root {
+            --path: path("M 0,0 m -320, 0 a 320,180 0 1,0 640,0 a 320,180 0 1,0 -640,0");
+            --speed: 35s;
+            --fade-speed: 0.7s; 
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: #ffffff;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            overflow: hidden; /* Locks scrolling before the click */
+        }
+
+        /* =========================================
+           LAYER 1: BOTTOM (THE FIXED ARTWORK)
+           ========================================= */
+        .container {
+            position: fixed; 
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            width: 640px; 
+            height: 640px;
+            cursor: pointer; 
+            z-index: 1; /* BOTTOM LAYER */
+        }
+
+        .logo {
+            position: relative;
+            width: 450px; 
+            height: 450px;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        @media (max-width: 1125px) {
+            .logo { transform: scale(calc(100vw / 1125)); }
+        }
+
+        .logo img {
+            position: absolute; 
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%); 
+            max-width: 100%; height: auto;
+            transition: opacity var(--fade-speed) ease; 
+        }
+
+        #logo-img-overlay { opacity: 0; }
+        .logo.swapped #logo-img-base { opacity: 0; }
+        .logo.swapped #logo-img-overlay { opacity: 1; }
+
+        .char {
+            position: absolute;
+            top: 50%; left: 50%;
+            z-index: 10; 
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+            white-space: nowrap;
+            offset-path: var(--path);
+            offset-rotate: 0deg; 
+            animation: move var(--speed) linear infinite;
+        }
+
+        @keyframes move {
+            0% { offset-distance: 100%; }
+            100% { offset-distance: 0%; }
+        }
+
+        /* =========================================
+           LAYER 2: MIDDLE (FLOATING ASSETS c1-c9)
+           ========================================= */
+        .floating-layer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 5; /* MIDDLE LAYER: Above Logo, Below Text */
+            pointer-events: none; /* Let clicks pass through to the container */
+            overflow: hidden;
+            
+            /* Hidden initially, fades in with the text */
+            opacity: 0;
+            transition: opacity var(--fade-speed) ease;
+        }
+
+        .floating-layer.visible {
+            opacity: 1;
+        }
+
+        .float-img {
+            position: absolute;
+            top: 0;
+            height: auto;
+            /* Infinite vertical floating animation */
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(110vh); } /* Starts below the screen */
+            to { transform: translateY(-110vh); }  /* Floats up past the top */
+        }
+
+        /* Unsynchronized Settings: Varied positions, speeds, sizes, and delays */
+        /* Negative delays mean they are already mid-float when they appear */
+        .float-img:nth-child(1) { left: 5%; animation-duration: 45s; animation-delay: -10s; max-width: 150px; }
+        .float-img:nth-child(2) { left: 20%; animation-duration: 65s; animation-delay: -30s; max-width: 200px; }
+        .float-img:nth-child(3) { left: 85%; animation-duration: 50s; animation-delay: -5s; max-width: 120px; }
+        .float-img:nth-child(4) { left: 40%; animation-duration: 75s; animation-delay: -40s; max-width: 250px; }
+        .float-img:nth-child(5) { left: 60%; animation-duration: 40s; animation-delay: -15s; max-width: 180px; }
+        .float-img:nth-child(6) { left: 10%; animation-duration: 55s; animation-delay: -25s; max-width: 220px; }
+        .float-img:nth-child(7) { left: 75%; animation-duration: 85s; animation-delay: -50s; max-width: 160px; }
+        .float-img:nth-child(8) { left: 30%; animation-duration: 48s; animation-delay: -8s; max-width: 140px; }
+        .float-img:nth-child(9) { left: 50%; animation-duration: 60s; animation-delay: -20s; max-width: 190px; }
+
+
+        /* =========================================
+           LAYER 3: TOP (SCROLLABLE TEXT OVERLAY)
+           ========================================= */
+        .content-wrapper {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            z-index: 20; /* TOP LAYER */
+            pointer-events: none; 
+        }
+
+        .hidden-text {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 10vh; 
+            margin-bottom: 10vh; 
+            
+            /* Text Box Removed: Text flows directly over the layers below */
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+            
+            /* Hidden state */
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity var(--fade-speed) ease, transform var(--fade-speed) ease;
+        }
+
+        .hidden-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; 
+        }
+
+        /* Typography & Layout Spacing */
+        .hidden-text header { margin-bottom: 50px; display: flex; flex-direction: column; gap: 8px; }
+        .hidden-text h1 { font-size: 24px; letter-spacing: 2px; }
+        .hidden-text h2 { font-weight: normal; font-size: 16px; line-height: 1.6; margin-bottom: 40px; }
+        
+        .artist-list { display: flex; flex-direction: column; gap: 15px; }
+        .artist-list details { padding: 0; }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            list-style: none;
+            outline: none;
+        }
+        summary::-webkit-details-marker { display: none; }
+        
+        summary::before {
+            content: '+ ';
+            color: #888;
+            margin-right: 5px;
+            font-family: monospace;
+        }
+        details[open] summary::before { content: '- '; }
+        
+        details p {
+            margin-top: 8px; 
+            color: #555;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img id="logo-img-base" src="assets/LOGO crop_NEFELIBATA.png" alt="Logo">
+        <img id="logo-img-overlay" src="assets/LOGO crop_NEFELIBATA PERPETUA.png" alt="Logo Perpetua">
+    </div>
+    
+    <div id="slogan-container"></div>
+</div>
+
+<div id="floating-layer" class="floating-layer">
+    <img src="assets/c1.png" class="float-img" alt="">
+    <img src="assets/c2.png" class="float-img" alt="">
+    <img src="assets/c3.png" class="float-img" alt="">
+    <img src="assets/c4.png" class="float-img" alt="">
+    <img src="assets/c5.png" class="float-img" alt="">
+    <img src="assets/c6.png" class="float-img" alt="">
+    <img src="assets/c7.png" class="float-img" alt="">
+    <img src="assets/c8.png" class="float-img" alt="">
+    <img src="assets/c9.png" class="float-img" alt="">
+</div>
+
+<div class="content-wrapper">
+    <div id="emerging-text" class="hidden-text">
+        <header>
+            <h1>NEFELIBATA PERPETUA</h1>
+            <i>2024</i>
+        </header>
+        
+        <main>
+            <section>
+                <h2>
+                    <p>nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals - open-access space of autonomy-freedom</p>
+                </h2>
+                <details style="margin-bottom: 40px;">
+                    <summary>manifest</summary>
+                    <p>nefelibata manifest</p>
+                </details>
+            </section>
+            
+            <section class="artist-list">
+                <details>
+                    <summary>Beatriz Blasi - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Clarisse Pinto - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Daniela Lino - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Gaspar Cohen - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Gil Peixoto - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>José Carvalho - untitled, 2019-2022</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Juliana Campos - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Maria D'Orey - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Mayss - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Paulo Ávila - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+                <details>
+                    <summary>Ricardo Nogueira Fernandes - untitled, XXXX-XXXX</summary>
+                    <p>artist description here</p>
+                    <p>artwork description here</p>
+                </details>
+            </section>
+        </main>
+    </div>
+</div>
+
+<script>
+    const slogan = "nefelibata is a multi-disciplinar curated archive of works by an orbital network of individuals ❊ open-access space of autonomy-freedom • ";
+    const sloganContainer = document.getElementById('slogan-container');
+    const logoContainer = document.querySelector('.logo');
+    const mainContainer = document.querySelector('.container');
+    const emergingText = document.getElementById('emerging-text'); 
+    const floatingLayer = document.getElementById('floating-layer'); // The new Layer 2
+    
+    const reversedLetters = slogan.split('').reverse();
+    const totalChars = reversedLetters.length;
+
+    reversedLetters.forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.innerText = char === " " ? "\u00A0" : char;
+        
+        span.style.animationDelay = `calc((${i} / ${totalChars}) * -${getComputedStyle(document.documentElement).getPropertyValue('--speed')})`;
+        
+        sloganContainer.appendChild(span);
+    });
+
+    // The { once: true } ensures this click action only happens exactly one time
+    mainContainer.addEventListener('click', () => {
+        // 1. Triggers the CSS image crossfade
+        logoContainer.classList.add('swapped');
+        
+        // 2. Removes the clickable pointer hand
+        mainContainer.style.cursor = 'default'; 
+
+        // 3. Unlocks the page so the user can scroll through the long text
+        document.body.style.overflowY = 'auto';
+
+        // 4. Fades in Layer 2 (Floating Assets) and Layer 3 (The Text Overlay)
+        floatingLayer.classList.add('visible');
+        emergingText.classList.add('visible');
+    }, { once: true });
+</script>
+
+</body>
+</html>
