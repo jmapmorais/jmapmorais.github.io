@@ -310,6 +310,7 @@
     mainContainer.addEventListener('click', () => {
         logoContainer.classList.add('swapped');
         mainContainer.style.cursor = 'default'; 
+        document.documentElement.style.overflowY = 'auto';
         document.body.style.overflowY = 'auto';
         
         floatingLayer.classList.add('visible');
