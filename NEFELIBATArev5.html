@@ -48,8 +48,8 @@
             z-index: 1; /* Sits behind the spinning text */
         }
 
-        @media (max-width: 1125px) {
-            .logo { transform: scale(calc(100vw / 1125)); }
+        @media (max-width: 900px) {
+            .logo { transform: scale(calc(100vw / 900)); }
         }
 
         .logo img {
@@ -98,7 +98,7 @@
             pointer-events: none; /* Let clicks pass through to the container */
             overflow: hidden;
             
-            opacity: 0;
+            opacity: 1;
             transition: opacity var(--fade-speed) ease;
         }
 
@@ -121,14 +121,14 @@
             to { transform: translateY(-110vh); }  
         }
 
-        .float-img:nth-child(1) { animation-duration: 45s; animation-delay: -10s; }
+        .float-img:nth-child(1) { animation-duration: 145s; animation-delay: -10s; }
         .float-img:nth-child(2) { animation-duration: 65s; animation-delay: -30s; }
         .float-img:nth-child(3) { animation-duration: 50s; animation-delay: -5s; }
         .float-img:nth-child(4) { animation-duration: 75s; animation-delay: -40s; }
-        .float-img:nth-child(5) { animation-duration: 40s; animation-delay: -15s; }
+        .float-img:nth-child(5) { animation-duration: 140s; animation-delay: -15s; }
         .float-img:nth-child(6) { animation-duration: 55s; animation-delay: -25s; }
         .float-img:nth-child(7) { animation-duration: 85s; animation-delay: -50s; }
-        .float-img:nth-child(8) { animation-duration: 48s; animation-delay: -8s; }
+        .float-img:nth-child(8) { animation-duration: 98s; animation-delay: -8s; }
         .float-img:nth-child(9) { animation-duration: 60s; animation-delay: -20s; }
 
 
