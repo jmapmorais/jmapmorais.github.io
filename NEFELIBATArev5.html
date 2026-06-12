@@ -85,48 +85,52 @@
         }
 
         /* =========================================
-           LAYER 2: MIDDLE (FULL-WIDTH FLOATING ASSETS c1-c9)
-           ========================================= */
-        .floating-layer {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            
-            /* Forced high above Layer 1 */
-            z-index: 50; 
-            
-            pointer-events: none; /* Let clicks pass through to the container */
-            overflow: visible;
-            
-            opacity: 1;
-            transition: opacity var(--fade-speed) ease;
-        }
+   LAYER 2: MIDDLE (FULL-WIDTH FLOATING ASSETS c1-c9)
+   ========================================= */
+.floating-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    
+    /* Forced high above Layer 1 */
+    z-index: 50; 
+    
+    pointer-events: none; /* Let clicks pass through to the container */
+    overflow: visible;
+    
+    /* FIX 1: Set initial opacity to 0 so it stays hidden until the click */
+    opacity: 0; 
+    transition: opacity var(--fade-speed) ease;
+}
 
-        .floating-layer.visible {
-            opacity: 1;
-        }
+.floating-layer.visible {
+    opacity: 1;
+}
 
-        .float-img {
-            position: absolute;
-            top: 0;
-            left: 0; 
-            width: 100%; 
-            height: auto; 
-            
-            animation: floatUp linear infinite;
-        }
+.float-img {
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%; 
+    height: auto; 
+    
+    /* FIX 2: Explicit animation properties to prevent the 0s shorthand bug */
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
 
-        @keyframes floatUp {
-            from { transform: translateY(110vh); } 
-            to { transform: translateY(-110vh); }  
-        }
+@keyframes floatUp {
+    from { transform: translateY(110vh); } 
+    to { transform: translateY(-110vh); }  
+}
 
-        .float-img:nth-child(1) { animation-duration: 145s; animation-delay: -10s; }
-        .float-img:nth-child(2) { animation-duration: 65s; animation-delay: -30s; }
-        .float-img:nth-child(3) { animation-duration: 50s; animation-delay: -5s; }
-        .float-img:nth-child(4) { animation-duration: 75s; animation-delay: -40s; }
-        .float-img:nth-child(5) { animation-duration: 140s; animation-delay: -15s; }
-        .float-img:nth-child(6) { animation-duration: 55s; animation-delay: -25s; }
+.float-img:nth-child(1) { animation-duration: 145s; animation-delay: -10s; }
+.float-img:nth-child(2) { animation-duration: 65s; animation-delay: -30s; }
+.float-img:nth-child(3) { animation-duration: 50s; animation-delay: -5s; }
+.float-img:nth-child(4) { animation-duration: 75s; animation-delay: -40s; }
+.float-img:nth-child(5) { animation-duration: 140s; animation-delay: -15s; }
+.float-img:nth-child(6) { animation-duration: 55s; animation-delay: -25s; }
       
 
 
